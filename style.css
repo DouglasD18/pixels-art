@@ -1,17 +1,17 @@
 #title{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 5px;
 }
 
 #color-palette{
-    height: 400px;
-    margin: 50px 5px;
+    height: 42px;
 }
 
 .color {
     border: 1px solid black;
     display: inline;
-    padding: 40px;
-    margin: 5px;
+    width: 40px;
+    height: 40px;
 }
 
 #blue {
