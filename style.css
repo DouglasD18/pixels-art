@@ -1,6 +1,10 @@
+*{
+
+}
+
 #title{
     margin-bottom: 20px;
-    font-size: 5px;
+    font-size: 20px;
 }
 
 #color-palette{
@@ -9,7 +13,7 @@
 
 .color {
     border: 1px solid black;
-    display: inline;
+    display: inline-block;
     width: 40px;
     height: 40px;
 }
@@ -28,4 +32,21 @@
 
 #pink {
     background-color: #D50DD9;
+}
+
+#pixel-board{
+    height: 210px;
+    width: 210px;
+}
+
+.linha{
+    height: 42px;
+}
+
+.pixel{
+    display: inline-block;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
 }
