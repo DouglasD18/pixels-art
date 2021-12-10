@@ -3,6 +3,8 @@ let vertical = 1;
 let horizontal = 1;
 let colorPalette = document.getElementById('color-palette');
 let color = document.getElementsByClassName('color');
+let pixels = document.getElementsByClassName('pixel');
+let button = document.getElementById('clear-board');
 
 for (let i = 0; i < 5; i++) {
     let div = document.createElement('div')
@@ -15,6 +17,8 @@ for (let i = 0; i < 5; i++) {
         horizontal += 1;
     }
 }
+
+
 
 function removeSelected() {
     for (let i = 0; i < color.length; i++) {
@@ -39,3 +43,20 @@ color[0].addEventListener('click', trocaSelected);
 color[1].addEventListener('click', trocaSelected);
 color[2].addEventListener('click', trocaSelected);
 color[3].addEventListener('click', trocaSelected);
+
+function trocaBackgroundColor(event) {
+    let painel = document.querySelector('.selected');
+    let cor = getComputedStyle(painel, null).getPropertyValue("background-color");
+    let pixel = event.target;
+    pixel.style.backgroundColor = cor;
+}
+
+for (let i = 0; i < pixels.length; i++) {
+    pixels[i].addEventListener('click', trocaBackgroundColor);
+}
+
+button.addEventListener('click', function(){
+    for (let i = 0; i < pixels.length; i++) {
+        pixels[i].style.backgroundColor = 'white';
+    }
+})

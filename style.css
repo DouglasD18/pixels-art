@@ -47,3 +47,7 @@
     height: 40px;
     border: 1px solid black;
 }
+
+#clear-board {
+    margin-bottom: 20px;
+}
