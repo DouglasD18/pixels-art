@@ -7,6 +7,7 @@ let pixels = document.getElementsByClassName('pixel');
 let button = document.getElementById('clear-board');
 let btn = document.getElementById('generate-board');
 let input = document.getElementById('board-size');
+let linhas = document.getElementsByClassName('linha');
 
 for (let i = 0; i < 5; i++) {
     let div = document.createElement('div')
@@ -65,20 +66,39 @@ button.addEventListener('click', function(){
 
 btn.addEventListener('click', newSize);
 function mudaSize() {
-    if (input.value < '5') {
+    if (parseInt(input.value, 10) < 5) {
         let valor = '5px';
+        let valorLinha = '7px';
+        for (let i = 0; i < 5; i++) {
+            linhas[i].style.height = valorLinha;
+        }
+        let valorQuadro = '25px';
+        quadro.style.height = valorQuadro;
         for (let i = 0; i < pixels.length; i++) {
             pixels[i].style.height = valor;
-            pixels[i].style.width = valor;
+            pixels[i].style.width = valor;        
         }
-    } if (input.value > '50') {
+    } if (parseInt(input.value, 10) > 50) {
         let valor = '50px';
+        let valorLinha = '52px';
+        for (let i = 0; i < 5; i++) {
+            linhas[i].style.height = valorLinha;
+        }
+        let valorQuadro = '250px';
+        quadro.style.height = valorQuadro;
         for (let i = 0; i < pixels.length; i++) {
             pixels[i].style.height = valor;
             pixels[i].style.width = valor;
         }
     } else {
         let valor = input.value + 'px';
+        let valorLinha = (parseInt(input.value, 10) + 2) + 'px';
+        for (let i = 0; i < 5; i++) {
+            linhas[i].style.height = valorLinha;
+            console.log(linhas[i]);
+        }
+        let valorQuadro = (input.value * 5) + 'px';
+        quadro.style.height = valorQuadro;
         for (let i = 0; i < pixels.length; i++) {
             pixels[i].style.height = valor;
             pixels[i].style.width = valor;
