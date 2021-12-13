@@ -5,6 +5,8 @@ let colorPalette = document.getElementById('color-palette');
 let color = document.getElementsByClassName('color');
 let pixels = document.getElementsByClassName('pixel');
 let button = document.getElementById('clear-board');
+let btn = document.getElementById('generate-board');
+let input = document.getElementById('board-size');
 
 for (let i = 0; i < 5; i++) {
     let div = document.createElement('div')
@@ -59,4 +61,52 @@ button.addEventListener('click', function(){
     for (let i = 0; i < pixels.length; i++) {
         pixels[i].style.backgroundColor = 'white';
     }
+})
+
+btn.addEventListener('click', newSize);
+function mudaSize() {
+    if (input.value < '5') {
+        let valor = '5px';
+        for (let i = 0; i < pixels.length; i++) {
+            pixels[i].style.height = valor;
+            pixels[i].style.width = valor;
+        }
+    } if (input.value > '50') {
+        let valor = '50px';
+        for (let i = 0; i < pixels.length; i++) {
+            pixels[i].style.height = valor;
+            pixels[i].style.width = valor;
+        }
+    } else {
+        let valor = input.value + 'px';
+        for (let i = 0; i < pixels.length; i++) {
+            pixels[i].style.height = valor;
+            pixels[i].style.width = valor;
+        }
+    }
+}
+
+function newSize() {
+    if (input.value === '') {
+        window.alert('Board inválido!');
+    } else {
+        mudaSize();
+        for (let i = 0; i < pixels.length; i++) {
+            pixels[i].style.backgroundColor = 'white';
+        }
+    }
+}
+
+function gerarCores(cor) {
+    let r = Math.random() * 255;
+    let g = Math.random() * 255;
+    let b = Math.random() * 255;
+
+    cor.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+} 
+
+document.addEventListener('DOMContentLoaded', function(){
+    gerarCores(color[1]);
+    gerarCores(color[2]);
+    gerarCores(color[3]);
 })
