@@ -22,7 +22,6 @@ for (let i = 0; i < 5; i++) {
 }
 
 
-
 function removeSelected() {
     for (let i = 0; i < color.length; i++) {
         if (color[i].classList[1] == 'selected') {
@@ -65,52 +64,61 @@ button.addEventListener('click', function(){
 })
 
 btn.addEventListener('click', newSize);
-function mudaSize() {
-    if (parseInt(input.value, 10) < 5) {
-        let valor = '5px';
-        let valorLinha = '7px';
-        for (let i = 0; i < 5; i++) {
-            linhas[i].style.height = valorLinha;
-        }
-        let valorQuadro = '25px';
-        quadro.style.height = valorQuadro;
-        for (let i = 0; i < pixels.length; i++) {
-            pixels[i].style.height = valor;
-            pixels[i].style.width = valor;        
-        }
-    } if (parseInt(input.value, 10) > 50) {
-        let valor = '50px';
-        let valorLinha = '52px';
-        for (let i = 0; i < 5; i++) {
-            linhas[i].style.height = valorLinha;
-        }
-        let valorQuadro = '250px';
-        quadro.style.height = valorQuadro;
-        for (let i = 0; i < pixels.length; i++) {
-            pixels[i].style.height = valor;
-            pixels[i].style.width = valor;
-        }
-    } else {
-        let valor = input.value + 'px';
-        let valorLinha = (parseInt(input.value, 10) + 2) + 'px';
-        for (let i = 0; i < 5; i++) {
-            linhas[i].style.height = valorLinha;
-            console.log(linhas[i]);
-        }
-        let valorQuadro = (input.value * 5) + 'px';
-        quadro.style.height = valorQuadro;
-        for (let i = 0; i < pixels.length; i++) {
-            pixels[i].style.height = valor;
-            pixels[i].style.width = valor;
-        }
-    }
-}
-
 function newSize() {
-    if (input.value === '') {
-        window.alert('Board inválido!');
+    while (quadro.firstChild) {
+        quadro.removeChild(quadro.firstChild);
+    }
+//Essa a parte de cima foi tirada do site da MDN.
+    if (input.value == 0) {
+        window.alert("Board inválido!");
+    } else if (input.value <= 5) {
+        for (let i = 0; i < 5; i++) {
+            let div = document.createElement('div')
+            div.className = 'linha';
+            quadro.appendChild(div)
+            for (let j = 0; j < 5; j++) {
+                let pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                div.appendChild(pixel);
+                horizontal += 1;
+            }
+        }
+        quadro.style.height = '210px';
+        quadro.style.width = '210px';
+        for (let i = 0; i < pixels.length; i++) {
+            pixels[i].style.backgroundColor = 'white';
+        }
+    } else if (input.value > 50) {
+        for (let i = 0; i < 50; i++) {
+            let div = document.createElement('div')
+            div.className = 'linha';
+            quadro.appendChild(div)
+            for (let j = 0; j < 50; j++) {
+                let pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                div.appendChild(pixel);
+                horizontal += 1;
+            }
+        }
+        quadro.style.height = input.value * 42 + 'px';
+        quadro.style.width = input.value * 42 + 'px';
+        for (let i = 0; i < pixels.length; i++) {
+            pixels[i].style.backgroundColor = 'white';
+        }
     } else {
-        mudaSize();
+        for (let i = 0; i < input.value; i++) {
+            let div = document.createElement('div')
+            div.className = 'linha';
+            quadro.appendChild(div)
+            for (let j = 0; j < input.value; j++) {
+                let pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                div.appendChild(pixel);
+                horizontal += 1;
+            }
+        }
+        quadro.style.height = input.value * 42 + 'px';
+        quadro.style.width = input.value * 42 + 'px';
         for (let i = 0; i < pixels.length; i++) {
             pixels[i].style.backgroundColor = 'white';
         }

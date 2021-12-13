@@ -32,12 +32,12 @@
 }
 
 #pixel-board{
-    height: 210px;
-    width: 210px;
+    min-height: 210px;
+    min-width: 210px;
 }
 
 .linha{
-    width: 260px;
+    min-width: 260px;
     height: 42px;
 }
 
