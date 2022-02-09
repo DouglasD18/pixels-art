@@ -1,30 +1,24 @@
-let quadro = document.getElementById('pixel-board');
-let vertical = 1;
-let horizontal = 1;
-let colorPalette = document.getElementById('color-palette');
-let color = document.getElementsByClassName('color');
-let pixels = document.getElementsByClassName('pixel');
-let button = document.getElementById('clear-board');
-let btn = document.getElementById('generate-board');
-let input = document.getElementById('board-size');
-let linhas = document.getElementsByClassName('linha');
+/* eslint-disable no-param-reassign */
+const quadro = document.getElementById('pixel-board');
+const color = document.getElementsByClassName('color');
+const button = document.getElementById('clear-board');
+const btn = document.getElementById('generate-board');
+const input = document.getElementById('board-size');
 
-for (let i = 0; i < 5; i++) {
-    let div = document.createElement('div')
+for (let i = 0; i < 5; i += 1) {
+    const div = document.createElement('div');
     div.className = 'linha';
-    quadro.appendChild(div)
-    for (let j = 0; j < 5; j++) {
-        let pixel = document.createElement('div');
+    quadro.appendChild(div);
+    for (let j = 0; j < 5; j += 1) {
+        const pixel = document.createElement('div');
         pixel.className = 'pixel';
         div.appendChild(pixel);
-        horizontal += 1;
     }
 }
 
-
 function removeSelected() {
-    for (let i = 0; i < color.length; i++) {
-        if (color[i].classList[1] == 'selected') {
+    for (let i = 0; i < color.length; i += 1) {
+        if (color[i].classList[1] === 'selected') {
             color[i].classList.remove('selected');
             break;
         }
@@ -37,7 +31,7 @@ function adicionaSelected(clicado) {
 
 function trocaSelected(event) {
     removeSelected();
-    let clicado = event.target;
+    const clicado = event.target;
     adicionaSelected(clicado);
 }
 
@@ -47,94 +41,80 @@ color[2].addEventListener('click', trocaSelected);
 color[3].addEventListener('click', trocaSelected);
 
 function trocaBackgroundColor(event) {
-    let painel = document.querySelector('.selected');
-    let cor = getComputedStyle(painel, null).getPropertyValue("background-color");
-    let pixel = event.target;
+    const painel = document.querySelector('.selected');
+    const cor = getComputedStyle(painel, null).getPropertyValue('background-color');
+    const pixel = event.target;
     pixel.style.backgroundColor = cor;
 }
 
-for (let i = 0; i < pixels.length; i++) {
-    pixels[i].addEventListener('click', trocaBackgroundColor);
-}
+const addNewColor = () => {
+    const pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((pixel) => {
+        pixel.addEventListener('click', trocaBackgroundColor);
+    });
+};
 
-button.addEventListener('click', function(){
-    for (let i = 0; i < pixels.length; i++) {
-        pixels[i].style.backgroundColor = 'white';
+const turnWhite = () => {
+    const pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((pixelColor) => {
+        pixelColor.style.backgroundColor = 'white';
+    });
+};
+
+button.addEventListener('click', turnWhite);
+
+const clearQuadro = () => {
+    quadro.innerHTML = '';
+};
+
+const addQuadro = (value) => {
+    for (let i = 0; i < value; i += 1) {
+        const div = document.createElement('div');
+        div.className = 'linha';
+        quadro.appendChild(div);
+        for (let j = 0; j < value; j += 1) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            div.appendChild(pixel);
+        }
     }
-})
+    quadro.style.height = `${value * 42}px`;
+    turnWhite();
+};
+
+function newSize() { 
+    clearQuadro();
+    if (input.value === 0) {
+        window.alert('Board inválido!');
+        addQuadro(5);
+    }
+    if (input.value <= 5) {
+        addQuadro(5);
+    } else if (input.value > 50) {
+        addQuadro(50);
+    } else {
+        addQuadro(input.value);
+    }
+    input.value = '';
+    addNewColor();
+}
 
 btn.addEventListener('click', newSize);
-function newSize() {
-    while (quadro.firstChild) {
-        quadro.removeChild(quadro.firstChild);
-    }
-//Essa a parte de cima foi tirada do site da MDN.
-    if (input.value == 0) {
-        window.alert("Board inválido!");
-    } else if (input.value <= 5) {
-        for (let i = 0; i < 5; i++) {
-            let div = document.createElement('div')
-            div.className = 'linha';
-            quadro.appendChild(div)
-            for (let j = 0; j < 5; j++) {
-                let pixel = document.createElement('div');
-                pixel.className = 'pixel';
-                div.appendChild(pixel);
-                horizontal += 1;
-            }
-        }
-        quadro.style.height = '210px';
-        quadro.style.width = '210px';
-        for (let i = 0; i < pixels.length; i++) {
-            pixels[i].style.backgroundColor = 'white';
-        }
-    } else if (input.value > 50) {
-        for (let i = 0; i < 50; i++) {
-            let div = document.createElement('div')
-            div.className = 'linha';
-            quadro.appendChild(div)
-            for (let j = 0; j < 50; j++) {
-                let pixel = document.createElement('div');
-                pixel.className = 'pixel';
-                div.appendChild(pixel);
-                horizontal += 1;
-            }
-        }
-        quadro.style.height = input.value * 42 + 'px';
-        quadro.style.width = input.value * 42 + 'px';
-        for (let i = 0; i < pixels.length; i++) {
-            pixels[i].style.backgroundColor = 'white';
-        }
-    } else {
-        for (let i = 0; i < input.value; i++) {
-            let div = document.createElement('div')
-            div.className = 'linha';
-            quadro.appendChild(div)
-            for (let j = 0; j < input.value; j++) {
-                let pixel = document.createElement('div');
-                pixel.className = 'pixel';
-                div.appendChild(pixel);
-                horizontal += 1;
-            }
-        }
-        quadro.style.height = input.value * 42 + 'px';
-        quadro.style.width = input.value * 42 + 'px';
-        for (let i = 0; i < pixels.length; i++) {
-            pixels[i].style.backgroundColor = 'white';
-        }
-    }
-}
 
 function gerarCores(cor) {
-    let r = Math.random() * 255;
-    let g = Math.random() * 255;
-    let b = Math.random() * 255;
+    const r = Math.random() * 255;
+    const g = Math.random() * 255;
+    const b = Math.random() * 255;
 
     cor.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 } 
 
-document.addEventListener('DOMContentLoaded', function(){
+const changeColors = () => {
+    gerarCores(color[0]);
     gerarCores(color[1]);
     gerarCores(color[2]);
     gerarCores(color[3]);
-})
+    addNewColor();
+};
+
+document.addEventListener('DOMContentLoaded', changeColors);

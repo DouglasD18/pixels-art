@@ -8,22 +8,26 @@
     <title>Projeto - Paleta de Cores</title>
 </head>
 <body>
-    <h1 id="title">Paleta de Cores</h1>
+    <div class="container">
+        <h1 id="title">Paleta de Cores</h1>
 
-    <div id="color-palette">
-        <div class="color selected" id="black"></div>
-        <div class="color" id="orange"></div>
-        <div class="color" id="blue"></div>
-        <div class="color" id="pink"></div>
+        <div id="color-palette">
+            <div class="color selected" id="black"></div>
+            <div class="color" id="orange"></div>
+            <div class="color" id="blue"></div>
+            <div class="color" id="pink"></div>
+        </div>
+        
+        <div id="enter">
+            <button type="submit" id="clear-board">Limpar</button>
+            <input type="number" id="board-size" min="1">
+            <button type="submit" id="generate-board">Mudar tamanho</button>
+        </div>
+
+        <div id="pixel-board"></div>
     </div>
-    
-    <button type="submit" id="clear-board">Limpar</button>
-
-    <input type="number" id="board-size" min="1">
-    <button type="submit" id="generate-board">VQV</button>
-
-    <div id="pixel-board"></div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
